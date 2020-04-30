@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AuthenticationService} from './REST/authentication.service';
 import {Router} from '@angular/router';
 import {AppConfig} from './app.config';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import {AppConfig} from './app.config';
 })
 export class AppComponent {
   title = 'musicbox-user';
+  home = faHome;
   loggedIn = false;
   constructor(
     private authService: AuthenticationService,
@@ -25,6 +27,7 @@ export class AppComponent {
       if (loggedIn) {
         this.router.navigateByUrl('/home');
       } else {
+        console.log(AppConfig.LocalStorageKeys.TOKEN);
         localStorage.removeItem(AppConfig.LocalStorageKeys.TOKEN);
         this.router.navigateByUrl('/login');
       }
