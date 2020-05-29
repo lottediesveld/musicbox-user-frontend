@@ -10,7 +10,7 @@ import { user } from '../models/user';
 })
 export class AuthenticationService {
   private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient) {}
 
   /** GET login codes from the server */
   getLogin(username: string, password: string) {
@@ -57,7 +57,7 @@ export class AuthenticationService {
     const serverURL = AppConfig.ApiBaseURL + 'UserController/registration';
     return this.http.post<user>(serverURL, user).pipe(
       map((result) => (result as unknown) as string),
-      catchError(this.handleError<any>('postRegistert'))
+      catchError(this.handleError<any>('postRegister'))
     );
   }
 

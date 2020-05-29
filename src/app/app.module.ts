@@ -13,13 +13,19 @@ import { httpInterceptors } from './REST/http-interceptors/interseptors'
 import { CookieService } from 'ngx-cookie-service';
 import { Authentication } from './app-routing-guards';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AccountComponent } from './account/account.component';
+import { SongDetailComponent } from './song-detail/song-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent,
+    AccountComponent,
+    SongDetailComponent
   ],
   imports: [
     BrowserModule,
