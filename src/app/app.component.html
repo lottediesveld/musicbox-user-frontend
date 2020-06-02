@@ -47,13 +47,4 @@
   <!--/.Navbar-->
 </ng-container>
 
-<ul class="list-group">
-  <a class="list-group-item" *ngFor="let song of songs">
-    <div class="bmd-list-group-col">
-      <p class="list-group-item-heading">{{song.title}}</p>
-      <p class="list-group-item-text">{{song.artist}}, {{song.album}}</p>
-    </div>
-  </a>
-</ul>
-
 <router-outlet></router-outlet>

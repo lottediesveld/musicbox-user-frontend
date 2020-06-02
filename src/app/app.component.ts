@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthenticationService} from './REST/authentication.service';
-import {Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {AppConfig} from './app.config';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import {MusicService} from './REST/music.service';
@@ -42,9 +42,22 @@ export class AppComponent {
 
   searchSongs(event: any): void {
     if (event.keyCode === 13) {
+      console.log("search");
       this.musicService.searchSongs(event.target.value).subscribe((data: Song[]) => {
         this.songs = data;
+        console.log(data);
+        if (this.songs != null){
+          console.log("songs are in");
+          this.openSongs(this.songs);
+        }
       });
     }
+  }
+
+  openSongs(songs: Song[]): void {
+    console.log("routerlink");
+    this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/song-detail'], {state: {data: {songs}}});
+    });
   }
 }
