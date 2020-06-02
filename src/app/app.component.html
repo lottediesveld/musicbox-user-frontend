@@ -23,7 +23,7 @@
         <!-- Search form -->
         <form class="form-inline waves-light" mdbWavesEffect>
           <div class="md-form my-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" (keydown)="searchSongs($event)">
           </div>
         </form>
         <li class="nav-item">
@@ -46,4 +46,14 @@
   </mdb-navbar>
   <!--/.Navbar-->
 </ng-container>
+
+<ul class="list-group">
+  <a class="list-group-item" *ngFor="let song of songs">
+    <div class="bmd-list-group-col">
+      <p class="list-group-item-heading">{{song.title}}</p>
+      <p class="list-group-item-text">{{song.artist}}, {{song.album}}</p>
+    </div>
+  </a>
+</ul>
+
 <router-outlet></router-outlet>

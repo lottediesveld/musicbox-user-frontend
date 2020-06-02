@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { TextinputComponent } from "./custom-components/textinput/textinput.component";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,8 +26,10 @@ import { SongDetailComponent } from './song-detail/song-detail.component';
     HomeComponent,
     ProfileComponent,
     AccountComponent,
-    SongDetailComponent
+    SongDetailComponent,
+    TextinputComponent
   ],
+  exports: [AccountComponent],
   imports: [
     BrowserModule,
     RouterModule,
