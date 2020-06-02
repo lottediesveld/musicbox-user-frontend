@@ -7,10 +7,28 @@
     <form class="example-form">
       <input
         type="text"
+        placeholder="First name"
+        [(ngModel)]="firstName"
+        id="firstName"
+        name="firstName"
+        [value]="firstName"
+        required
+      />
+      <input
+        type="text"
+        placeholder="Last name"
+        [(ngModel)]="lastName"
+        id="lastName"
+        name="lastName"
+        [value]="lastName"
+        required
+      />
+      <input
+        type="text"
         placeholder="Username"
         [(ngModel)]="username"
-        id="customerCode"
-        name="customerCode"
+        id="username"
+        name="username"
         [value]="username"
         required
       />
@@ -44,7 +62,18 @@
         [value]="passwordConfirm"
         required
       />
+
+      <input
+        type="checkbox"
+        placeholder="Confirmation password"
+        [(ngModel)]="privacyConfirm"
+        id="privacyConfirm"
+        name="privacyConfirm"
+        [value]="privacyConfirm"
+        required
+      />
+      <p>Accept <a href="">privacy policy</a></p>
+      <button class="register-button"(click)="register()">Register</button>
     </form>
-    <button class="register-button"(click)="register()">Register</button>
   </div>
 </div>

@@ -12,11 +12,16 @@ import {AuthenticationService} from './authentication.service';
 })
 export class MusicService {
 
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
+  constructor(private http: HttpClient) { }
 
+  searchSongs(search: string) {
+    const URL = `${AppConfig.ApiBaseURL}/music/SongController/search/?search=` + search;
+
+    return this.http.get<Song[]>(URL)
+  }
 
   getAllSongs() {
-    const URL = `http://localhost:8762/music/SongController/all`;
+    const URL = `${AppConfig.ApiBaseURL}/music/SongController/all`;
 
     return this.http.get<Song[]>(URL)
   }
