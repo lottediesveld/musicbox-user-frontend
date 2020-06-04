@@ -7,6 +7,7 @@ import {Playlist} from '../models/playlist';
 import {forEachComment} from 'tslint';
 import {MusicService} from '../REST/music.service';
 import {Song} from '../models/song';
+import {AppConfig} from '../app.config';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import {Song} from '../models/song';
 })
 export class HomeComponent implements OnInit {
   playlists : Playlist[];
-  songs : Song[];
+  // songs : Song[];
   private searchField : String;
 
   constructor( private router: Router,
@@ -33,17 +34,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getAllSongs(): void {
-    this.musicService.getAllSongs().subscribe((data: Song[]) => {
-      this.songs = data;
-    });
-  }
-
-  openPlaylist(songs: Song[]): void {
-    this.router.navigate(["/song-detail"], {state: {data: {songs}}});
-  }
-
-  searchSong(): void {
-
+  openPlaylist(playlist: Playlist): void {
+    localStorage.setItem(AppConfig.LocalStorageKeys.PLAYLIST, playlist.title);
+    var songs = playlist.songs;
+    this.router.navigate(["/song-detail"], {state: {data: {songs, playlist}}});
   }
 }

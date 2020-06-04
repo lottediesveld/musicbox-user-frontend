@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Song} from '../models/song';
 import {AuthenticationService} from './authentication.service';
+import {AddToPlaylistDTO} from '../models/AddToPlaylistDTO';
 
 @Injectable({
   providedIn: 'root'

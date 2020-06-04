@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { TextinputComponent } from "./custom-components/textinput/textinput.component";
+import { TextinputComponent } from './custom-components/textinput/textinput.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { SongDetailComponent } from './song-detail/song-detail.component';
+import { ContextMenuComponent } from './context-menu/context-menu.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SongDetailComponent } from './song-detail/song-detail.component';
     ProfileComponent,
     AccountComponent,
     SongDetailComponent,
-    TextinputComponent
+    TextinputComponent,
+    ContextMenuComponent
   ],
   exports: [AccountComponent],
   imports: [

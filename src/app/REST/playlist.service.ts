@@ -4,6 +4,8 @@ import {AppConfig} from '../app.config';
 import {Playlist} from '../models/playlist';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
+import {Song} from '../models/song';
+import {AddToPlaylistDTO} from '../models/AddToPlaylistDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +19,34 @@ export class PlaylistService {
     return this._playlists;
   }
 
+  addToPlaylist(song: Song, playlist: Playlist) {
+    const URL = `${AppConfig.ApiBaseURL}/playlist/PlaylistController/addSong`;
+
+    var DTO = new AddToPlaylistDTO(song, playlist);
+    var jsonObject = JSON.stringify(DTO);
+    console.log(jsonObject);
+    return this.http.post<Playlist[]>(URL, jsonObject).pipe(
+      map((result) => (result as unknown) as string),
+      catchError(this.handleError<any>('postAddToPlaylist'))
+    );
+  }
+
+  removeFromPlaylist(song: Song, playlist: Playlist) {
+    const URL = `${AppConfig.ApiBaseURL}/playlist/PlaylistController/deleteSongFromPlaylist`;
+
+    var DTO = new AddToPlaylistDTO(song, playlist);
+    var jsonObject = JSON.stringify(DTO);
+    console.log(jsonObject);
+    return this.http.post<Playlist>(URL, jsonObject).pipe(
+      map((result) => (result as unknown) as string),
+      catchError(this.handleError<any>('postAddToPlaylist'))
+    );
+  }
+
   getAllPlaylists() {
     const URL = `${AppConfig.ApiBaseURL}/playlist/PlaylistController/allPlaylists`;
 
     return this.http.get<Playlist[]>(URL)
-
-    //   .pipe
-    // (
-    //   map(result=> { return result[''] as Playlist[]} ),
-    //   catchError(this.handleError('getAllPlaylists', []))
-    // );
   }
 
   /**
