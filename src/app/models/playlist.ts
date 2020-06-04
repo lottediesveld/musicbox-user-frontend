@@ -2,6 +2,7 @@ import {Song} from './song';
 
 export class Playlist {
   private _id: number;
+  private _userId: number;
   private _title: string;
   private _songs: Array<Song>;
 
@@ -15,6 +16,10 @@ export class Playlist {
 
   set id(value: number) {
     this._id = value;
+  }
+
+  get userId(): number {
+    return this._userId;
   }
 
   get title(): string {

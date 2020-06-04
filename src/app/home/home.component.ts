@@ -8,6 +8,9 @@ import {forEachComment} from 'tslint';
 import {MusicService} from '../REST/music.service';
 import {Song} from '../models/song';
 import {AppConfig} from '../app.config';
+import {User} from '../models/user';
+import {AuthenticationService} from '../REST/authentication.service';
+import {UserService} from '../REST/user.service';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +20,12 @@ import {AppConfig} from '../app.config';
 export class HomeComponent implements OnInit {
   playlists : Playlist[];
   // songs : Song[];
+  user: User;
   private searchField : String;
 
   constructor( private router: Router,
                private playlistService: PlaylistService,
-               private musicService: MusicService) {
+               private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -29,8 +33,11 @@ export class HomeComponent implements OnInit {
   }
 
   getPlaylists(): void {
-    this.playlistService.getAllPlaylists().subscribe((data: Playlist[]) => {
-      this.playlists = data;
+    this.userService.getCurrentUser().subscribe((data: User) => {
+      localStorage.setItem(AppConfig.LocalStorageKeys.USER, String(data.id));
+      this.playlistService.getAllPlaylists().subscribe((data: Playlist[]) => {
+        this.playlists = data;
+      });
     });
   }
 

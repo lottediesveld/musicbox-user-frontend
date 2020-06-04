@@ -40,6 +40,12 @@ export class AppComponent {
     });
   }
 
+  openHome(): void {
+    this.router.navigateByUrl('/account', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/home']);
+    });
+  }
+
   searchSongs(event: any): void {
     if (event.keyCode === 13) {
       console.log("search");
