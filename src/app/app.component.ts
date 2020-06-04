@@ -48,6 +48,7 @@ export class AppComponent {
         console.log(data);
         if (this.songs != null){
           console.log("songs are in");
+          localStorage.setItem(AppConfig.LocalStorageKeys.PLAYLIST, "playlist");
           this.openSongs(this.songs);
         }
       });

@@ -1,5 +1,5 @@
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let playlist of playlists">
-    <button type="button" class="list-group-item" (click)="openPlaylist(playlist.songs)">{{ playlist.title }}</button>
+    <button type="button" class="list-group-item" (click)="openPlaylist(playlist)">{{ playlist.title }}</button>
   </li>
 </ul>
