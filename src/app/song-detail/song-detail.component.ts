@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Song} from '../models/song';
 import {Playlist} from '../models/playlist';
+import {UserService} from '../REST/user.service';
+import {MusicService} from '../REST/music.service';
 
 @Component({
   selector: 'app-song-detail',
@@ -19,11 +21,12 @@ export class SongDetailComponent implements OnInit {
 
   constructor() {
     this.songs = history.state.data.songs;
+    console.log(this.songs);
     this.playlist = history.state.data.playlist;
+    console.log(this.playlist);
   }
 
   ngOnInit(): void {
-    console.log(this.songs);
   }
 
   //activates the menu with the coordinates
@@ -33,6 +36,7 @@ export class SongDetailComponent implements OnInit {
     this.clickedSong=song
     this.contextmenu=true;
   }
+
   //disables the menu
   disableContextMenu(){
     this.contextmenu= false;

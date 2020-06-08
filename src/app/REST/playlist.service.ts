@@ -22,9 +22,8 @@ export class PlaylistService {
   addToPlaylist(song: Song, playlist: Playlist) {
     const URL = `${AppConfig.ApiBaseURL}/playlist/PlaylistController/addSong`;
 
-    var DTO = new AddToPlaylistDTO(song, playlist);
+    var DTO = new AddToPlaylistDTO(song.id, playlist.id);
     var jsonObject = JSON.stringify(DTO);
-    console.log(jsonObject);
     return this.http.post<Playlist[]>(URL, jsonObject).pipe(
       map((result) => (result as unknown) as string),
       catchError(this.handleError<any>('postAddToPlaylist'))
@@ -34,9 +33,8 @@ export class PlaylistService {
   removeFromPlaylist(song: Song, playlist: Playlist) {
     const URL = `${AppConfig.ApiBaseURL}/playlist/PlaylistController/deleteSongFromPlaylist`;
 
-    var DTO = new AddToPlaylistDTO(song, playlist);
+    var DTO = new AddToPlaylistDTO(song.id, playlist.id);
     var jsonObject = JSON.stringify(DTO);
-    console.log(jsonObject);
     return this.http.post<Playlist>(URL, jsonObject).pipe(
       map((result) => (result as unknown) as string),
       catchError(this.handleError<any>('postAddToPlaylist'))
@@ -45,7 +43,6 @@ export class PlaylistService {
 
   getAllPlaylists() {
     var id = Number(localStorage.getItem(AppConfig.LocalStorageKeys.USER));
-    console.log(id);
     const URL = `${AppConfig.ApiBaseURL}/playlist/PlaylistController/allPlaylists/?id=` + id;
 
     return this.http.get<Playlist[]>(URL)

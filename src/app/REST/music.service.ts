@@ -21,6 +21,13 @@ export class MusicService {
     return this.http.get<Song[]>(URL)
   }
 
+  getSongById(id: number) {
+    console.log(id);
+    const URL = `${AppConfig.ApiBaseURL}/music/SongController/songById/?id=` + Number(id);
+
+    return this.http.get<Song>(URL)
+  }
+
   getAllSongs() {
     const URL = `${AppConfig.ApiBaseURL}/music/SongController/all`;
 

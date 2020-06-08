@@ -1,5 +1,10 @@
 <div (click)="disableContextMenu()" oncontextmenu="return false;">
   <ul class="list-group">
+    <a class="list-group-item" *ngIf="songs.length === 0">
+      <div class="bmd-list-group-col">
+        <p >No songs</p>
+      </div>
+    </a>
     <a class="list-group-item" *ngFor="let song of songs" (contextmenu)="onrightClick(song, $event)">
       <div class="bmd-list-group-col">
         <p class="list-group-item-heading">{{song.title}}</p>

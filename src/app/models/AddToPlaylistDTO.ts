@@ -2,11 +2,11 @@ import {Song} from './song';
 import {Playlist} from './playlist';
 
 export class AddToPlaylistDTO {
-  private song: Song;
-  private playlist: Playlist;
+  private song: number;
+  private playlist: number;
 
 
-  constructor(song: Song, playlist: Playlist) {
+  constructor(song: number, playlist: number) {
     this.song = song;
     this.playlist = playlist;
   }

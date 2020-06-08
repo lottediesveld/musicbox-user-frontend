@@ -19,13 +19,16 @@ export class ContextMenuComponent implements OnInit {
 
   playlistBoolean: boolean;
   playlists: Playlist[];
+  songs: Song[];
 
   constructor(private playlistService: PlaylistService,
-              private router: Router) { }
+              private musicService: MusicService,
+              private router: Router) {
+    this.songs = new Array();
+  }
 
   ngOnInit(): void {
     this.getPlaylists();
-    console.log(localStorage.getItem(AppConfig.LocalStorageKeys.PLAYLIST));
     if (localStorage.getItem(AppConfig.LocalStorageKeys.PLAYLIST) !== "playlist"){
       this.playlistBoolean = true;
     } else {
@@ -49,9 +52,18 @@ export class ContextMenuComponent implements OnInit {
     var songs;
     this.playlistService.removeFromPlaylist(this.song, this.currentPlaylist).subscribe((data: Playlist) => {
       songs = data.songs
-      this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/song-detail'], {state: {data: {songs}}});
-      });
+      for (var j=0; j< songs.length; j++) {
+        var i = 0;
+        this.musicService.getSongById(songs[j].id).subscribe((data: Song)=> {
+          this.songs.push(data);
+          i++;
+          if (i == songs.length){
+            this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/song-detail'], {state: {data: {songs: this.songs}}});
+            });
+          }
+        })
+      }
     });
   }
 }
