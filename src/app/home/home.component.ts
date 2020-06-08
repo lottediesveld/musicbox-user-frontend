@@ -18,14 +18,16 @@ import {UserService} from '../REST/user.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  playlists : Playlist[];
-  // songs : Song[];
+  playlists: Playlist[];
+  songs: Song[];
   user: User;
   private searchField : String;
 
   constructor( private router: Router,
                private playlistService: PlaylistService,
-               private userService: UserService) {
+               private userService: UserService,
+               private musicService: MusicService) {
+    this.songs = new Array();
   }
 
   ngOnInit(): void {
@@ -43,7 +45,19 @@ export class HomeComponent implements OnInit {
 
   openPlaylist(playlist: Playlist): void {
     localStorage.setItem(AppConfig.LocalStorageKeys.PLAYLIST, playlist.title);
-    var songs = playlist.songs;
-    this.router.navigate(["/song-detail"], {state: {data: {songs, playlist}}});
+    if (playlist.songs.length == 0){
+      this.router.navigate(["/song-detail"], {state: {data: {songs: this.songs, playlist: playlist}}});
+    } else {
+      for (var j=0; j< playlist.songs.length; j++) {
+        var i = 0;
+        this.musicService.getSongById(playlist.songs[j].id).subscribe((data: Song)=> {
+          this.songs.push(data);
+          i++;
+          if (i == playlist.songs.length){
+            this.router.navigate(["/song-detail"], {state: {data: {songs: this.songs, playlist: playlist}}});
+          }
+        })
+      }
+    }
   }
 }

@@ -5,6 +5,9 @@ export class Song {
   private _artist: string;
 
   constructor() {
+    this._title = "";
+    this._album = "";
+    this._artist = "";
   }
 
 
@@ -21,5 +24,17 @@ export class Song {
   }
   get artist(): string {
     return this._artist;
+  }
+
+  set setTitle(value: string) {
+    this._title = value;
+  }
+
+  set setAlbum(value: string) {
+    this._album = value;
+  }
+
+  set setArtist(value: string) {
+    this._artist = value;
   }
 }
