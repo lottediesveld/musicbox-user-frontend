@@ -5,6 +5,8 @@ export class AppConfig {
 
   };
   static LocalStorageKeys = {
-    TOKEN: 'token'
+    TOKEN: 'token',
+    USER: 'user',
+    PLAYLIST: 'playlist'
   };
 }

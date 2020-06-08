@@ -1,0 +1,12 @@
+<div class="textinputcontainer">
+  <div *ngIf="label" class="col-sm-6 label">
+    
+      {{ label }}
+    
+  </div>
+  <h4 class="col-sm-6" *ngIf="disabled">{{ value }}</h4>
+
+  <div class="col-sm-6" *ngIf="!disabled">
+    <input placeholder="{{ placeholder }}" type="text" [ngModel]="value" />
+  </div>
+</div>

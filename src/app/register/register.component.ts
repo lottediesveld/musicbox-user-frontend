@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {user} from '../models/user';
+import { User } from '../models/user';
 import { AuthenticationService } from '../REST/authentication.service';
 
 @Component({
@@ -9,14 +9,16 @@ import { AuthenticationService } from '../REST/authentication.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  firstName: string;
+  lastName: string;
   username: string;
   email: string;
   password: string;
+  privacyConfirm: string;
 
-  newuser: user;
+  newuser: User;
 
   passwordConfirm: string;
-  result: string;
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService) { }
@@ -25,17 +27,26 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    this.newuser = new user(this.username, this.email, this.password);
-    if (this.password === this.passwordConfirm) {
-      this.authenticationService.postRegister(this.newuser).subscribe(
-        result => {
-          if (result === 'saved') {
-            this.router.navigate(['dashboard']);
+    this.newuser = new User(this.firstName, this.lastName, this.username, this.email, this.password);
+    if (this.privacyConfirm == null){
+      alert('Please read and accept the privacy policy!');
+    }
+    else{
+      if (this.password === this.passwordConfirm) {
+        console.log(this.privacyConfirm);
+        this.authenticationService.postRegister(this.newuser).subscribe(
+          result => {
+            if (result === 'saved') {
+              this.authenticationService.getLogin(this.newuser.username, this.newuser.password)
+              if (this.authenticationService.loggedIn()){
+                this.router.navigate(['home']);
+              }
+            }
           }
-        }
-      );
-    } else {
-      alert('Make sure passwords match.');
+        );
+      } else {
+        alert('Make sure passwords match.');
+      }
     }
   }
 }

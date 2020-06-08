@@ -1,0 +1,6 @@
+<div class="contextmenu" [ngStyle]="{'left.px': x, 'top.px': y}">
+  <button *ngIf="playlistBoolean" (click)="removeFromPlaylist()">Remove from playlist</button>
+  <li class="list-group-item" *ngIf="!playlistBoolean">
+    <button *ngFor="let playlist of playlists" (click)="addToPlaylist(playlist)">Add to playlist {{playlist.title}}</button>
+  </li>
+</div>

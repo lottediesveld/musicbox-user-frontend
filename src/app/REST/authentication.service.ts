@@ -4,13 +4,13 @@ import { Observable, of, BehaviorSubject, from } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { AppConfig } from '../app.config'
-import { user } from '../models/user';
+import { User } from '../models/user';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient) {}
 
   /** GET login codes from the server */
   getLogin(username: string, password: string) {
@@ -53,11 +53,11 @@ export class AuthenticationService {
   }
 
   /** POST: add a new user to the server */
-  postRegister(user: user): Observable<any> {
-    const serverURL = AppConfig.ApiBaseURL + 'UserController/registration';
-    return this.http.post<user>(serverURL, user).pipe(
+  postRegister(user: User): Observable<any> {
+    const serverURL = AppConfig.ApiBaseURL + '/user/UserController/newUser';
+    return this.http.post<User>(serverURL, user).pipe(
       map((result) => (result as unknown) as string),
-      catchError(this.handleError<any>('postRegistert'))
+      catchError(this.handleError<any>('postRegister'))
     );
   }
 
