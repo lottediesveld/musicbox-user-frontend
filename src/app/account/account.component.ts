@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {User} from '../models/user';
 import {UserService} from '../REST/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-acoount',
@@ -11,7 +12,8 @@ import {UserService} from '../REST/user.service';
 export class AccountComponent implements OnInit {
   user: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -20,6 +22,15 @@ export class AccountComponent implements OnInit {
   getCurrentUser(): void {
     this.userService.getCurrentUser().subscribe((data: User) => {
       this.user = data;
+    });
+  }
+
+  deleteUser(): void {
+    this.userService.deleteUser().subscribe((data:string) => {
+      if (data === "successful"){
+        alert("User deleted successfully");
+        this.router.navigate(["/login"]);
+      }
     });
   }
 }

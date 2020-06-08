@@ -13,6 +13,12 @@ export class UserService {
   getCurrentUser() {
     const URL = `${AppConfig.ApiBaseURL}/user/UserController/current`;
 
-    return this.http.get<User>(URL)
+    return this.http.get<User>(URL);
+  }
+
+  deleteUser() {
+    const URL = `${AppConfig.ApiBaseURL}/user/UserController/delete`
+
+    return this.http.delete<string>(URL);
   }
 }
