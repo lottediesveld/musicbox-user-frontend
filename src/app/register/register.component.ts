@@ -38,9 +38,6 @@ export class RegisterComponent implements OnInit {
           result => {
             if (result === 'saved') {
               this.authenticationService.getLogin(this.newuser.username, this.newuser.password)
-              if (this.authenticationService.loggedIn()){
-                this.router.navigate(['home']);
-              }
             }
           }
         );

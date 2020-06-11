@@ -7,7 +7,6 @@ export class Authentication implements CanActivate {
   constructor(private authService: AuthenticationService, private router: Router) {}
 
   canActivate() {
-
     if (this.authService.loggedIn()) {
       return true;
     }

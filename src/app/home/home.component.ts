@@ -35,11 +35,8 @@ export class HomeComponent implements OnInit {
   }
 
   getPlaylists(): void {
-    this.userService.getCurrentUser().subscribe((data: User) => {
-      localStorage.setItem(AppConfig.LocalStorageKeys.USER, String(data.id));
-      this.playlistService.getAllPlaylists().subscribe((data: Playlist[]) => {
+    this.playlistService.getAllPlaylists().subscribe((data: Playlist[]) => {
         this.playlists = data;
-      });
     });
   }
 

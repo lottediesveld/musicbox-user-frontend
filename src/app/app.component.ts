@@ -6,6 +6,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import {MusicService} from './REST/music.service';
 import {User} from './models/user';
 import {Song} from './models/song';
+import {UserService} from './REST/user.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent {
   constructor(
     private authService: AuthenticationService,
     private musicService: MusicService,
+    private userService: UserService,
     private router: Router
   ) {
     this.subscribeEvents();
@@ -31,7 +33,13 @@ export class AppComponent {
       this.loggedIn = loggedIn;
 
       if (loggedIn) {
-        this.router.navigateByUrl('/home');
+        this.userService.getCurrentUser().subscribe((data: User) => {
+          localStorage.setItem(AppConfig.LocalStorageKeys.USER, String(data.id));
+          if(localStorage.getItem(AppConfig.LocalStorageKeys.USER) === String(data.id)){
+            console.log(data.id);
+            this.router.navigateByUrl('/home');
+          }
+        });
       } else {
         console.log(AppConfig.LocalStorageKeys.TOKEN);
         localStorage.removeItem(AppConfig.LocalStorageKeys.TOKEN);
