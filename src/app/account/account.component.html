@@ -16,14 +16,16 @@
       [disabled]="true"
       [label]="'E-mailadres'"
     ></textinput>
-    <p>Verwijderen van uw gegevens kan worden aangevraagd via test@test.com</p>
     <button (click)="deleteUser()">Verwijder je account</button>
   </div>
   <div class="changepass">
     <h2>Wijzig je wachtwoord</h2>
-    <input placeholder="Huidige wachtwoord" />
-    <input placeholder="Nieuwe wachtwoord" />
-    <input placeholder="Bevestig wachtwoord" />
-    <button class="changepassbtn">Verander wachtwoord</button>
+    <input type="password" [(ngModel)]="newPassword1" placeholder="Nieuwe wachtwoord" />
+    <input type="password" [(ngModel)]="newPassword2" placeholder="Bevestig wachtwoord" />
+    <button (click)="changePassword()" class="changepassbtn">Verander wachtwoord</button>
+    <div *ngIf="show">
+      <p *ngIf="succes">Password updated!</p>
+      <p *ngIf="!succes">Something went wrong</p>
+    </div>
   </div>
 </div>
