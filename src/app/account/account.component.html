@@ -24,8 +24,7 @@
     <input type="password" [(ngModel)]="newPassword2" placeholder="Bevestig wachtwoord" />
     <button (click)="changePassword()" class="changepassbtn">Verander wachtwoord</button>
     <div *ngIf="show">
-      <p *ngIf="succes">Password updated!</p>
-      <p *ngIf="!succes">Something went wrong</p>
+      <p ngModel="successMessage" [ngClass]="{redClass: !succes}">{{successMessage}}</p>
     </div>
   </div>
 </div>

@@ -74,4 +74,8 @@ export class AppComponent {
       this.router.navigate(['/song-detail'], {state: {data: {songs}}});
     });
   }
+
+  logOut(): void{
+    this.authService.logOut();
+  }
 }

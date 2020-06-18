@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {HomeComponent} from './home/home.component';
-import {ProfileComponent} from './profile/profile.component';
 import {Authentication} from './app-routing-guards';
 import {from} from 'rxjs';
 import {AccountComponent} from './account/account.component';
@@ -15,7 +14,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [Authentication]},
-  { path: 'profile', component: ProfileComponent, canActivate: [Authentication]},
   { path: 'account', component: AccountComponent, canActivate: [Authentication]},
   { path: 'song-detail', component: SongDetailComponent, canActivate: [Authentication]}
 ];

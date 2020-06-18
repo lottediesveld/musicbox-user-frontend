@@ -4,7 +4,7 @@
   <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">MusicBox</a></mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand" style="color: white">MusicBox</a></mdb-navbar-brand>
 
     <!-- Collapsible content -->
     <links>
@@ -33,9 +33,8 @@
               <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                 <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
               <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-                <a class="dropdown-item" [routerLink]="['/profile']">Profile</a>
                 <a class="dropdown-item" [routerLink]="['/account']">Account</a>
-                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" (click)="logOut()">Log Out</a>
               </div>
             </div>
           </a>

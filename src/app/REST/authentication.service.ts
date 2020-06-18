@@ -44,12 +44,12 @@ export class AuthenticationService {
   // * Get authorization token */
   public getAuthorizationToken(): string {
     return localStorage.getItem(AppConfig.LocalStorageKeys.TOKEN);
-    //return this.cookieService.get('authorization-key');
   }
 
   // * Logout */
   public logOut(): void {
     this.isLoggedIn.next(false);
+    localStorage.clear();
   }
 
   /** POST: add a new user to the server */
@@ -71,7 +71,6 @@ export class AuthenticationService {
     return (error: any): Observable<T> => {
       // Let the user know how to register properly
       console.log(error);
-      alert(error.error.text);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

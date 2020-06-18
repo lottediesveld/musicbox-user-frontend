@@ -8,6 +8,11 @@ import {Subject} from 'rxjs';
   selector: 'app-acoount',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss'],
+  styles: [
+    `
+      .redClass { color: red }
+    `
+  ],
   encapsulation: ViewEncapsulation.None
 })
 export class AccountComponent implements OnInit {
@@ -16,8 +21,10 @@ export class AccountComponent implements OnInit {
   newPassword1: string;
   newPassword2: string;
   succes: boolean;
+  successMessage: string;
 
   visibilityChange: Subject<boolean> = new Subject<boolean>();
+  stringChange: Subject<string> = new Subject<string>();
 
   constructor(private userService: UserService,
               private router: Router,
@@ -25,9 +32,14 @@ export class AccountComponent implements OnInit {
     this.visibilityChange.subscribe((value) => {
       this.show = value; this.changeDetection.detectChanges();
     });
+    this.stringChange.subscribe((value) => {
+      this.successMessage = value; this.changeDetection.detectChanges();
+    })
   }
 
   ngOnInit(): void {
+    this.show = false;
+    this.succes = false;
     this.getCurrentUser();
   }
 
@@ -41,14 +53,20 @@ export class AccountComponent implements OnInit {
     if (this.newPassword1 === this.newPassword2) {
       this.userService.changePassword(this.newPassword1).subscribe( (data) => {
         console.log(data);
-        this.show=true;
         if (data === "saved"){
-          this.succes=true;
+          this.succes = true;
+          this.successMessage = "Password updated!"
+          this.show=true;
+        } else {
+          this.succes = false;
+          this.successMessage = "Oops something went wrong"
+          this.show=true;
         }
-        // this.router.navigateByUrl('//home', { skipLocationChange: true }).then(() => {
-        //   this.router.navigate(['account']);
-        // });
       })
+    } else {
+      this.succes = false;
+      this.successMessage = "Passwords don't match"
+      this.show=true;
     }
   }
 
