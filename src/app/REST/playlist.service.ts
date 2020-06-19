@@ -43,7 +43,7 @@ export class PlaylistService {
 
   getAllPlaylists() {
     var id = Number(localStorage.getItem(AppConfig.LocalStorageKeys.USER));
-    const URL = `${AppConfig.ApiBaseURL}/playlist/PlaylistController/allPlaylists/?id=` + id;
+    const URL = `${AppConfig.ApiBaseURL}/playlist/PlaylistController/allPlaylistsOfUser/?id=` + id;
 
     return this.http.get<Playlist[]>(URL)
   }

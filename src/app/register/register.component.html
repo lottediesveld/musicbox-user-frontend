@@ -76,4 +76,11 @@
       <button class="register-button"(click)="register()">Register</button>
     </form>
   </div>
+  <div *ngIf="show">
+    <p style="color: red">{{message}}</p>
+  </div>
+  <p class="registertext">
+    Already have an account? Click
+    <a (click)="login()" class="here">here</a> to Login.
+  </p>
 </div>

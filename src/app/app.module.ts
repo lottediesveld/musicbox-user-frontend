@@ -14,7 +14,6 @@ import { httpInterceptors } from './REST/http-interceptors/interseptors'
 import { CookieService } from 'ngx-cookie-service';
 import { Authentication } from './app-routing-guards';
 import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
 import { AccountComponent } from './account/account.component';
 import { SongDetailComponent } from './song-detail/song-detail.component';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
@@ -25,7 +24,6 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ProfileComponent,
     AccountComponent,
     SongDetailComponent,
     TextinputComponent,
